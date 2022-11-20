@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>voter login</title>
+    </head>
+    <style>
+        a{font-family:monospace;
+          font-weight: bold;
+          font-size: 18px;
+        }
+        h1{font-size: 40px;
+           font-family:monospace;
+        }
+        label{
+            font-size:20px;
+            font-family:monospace;
+            font-weight:bold;
+
+        }
+
+        input[type=radio]{
+            font-size:20px;
+            font-family:monospace;
+
+        }
+        
+        input[type=text]{
+           font-size:20px;
+           padding:8px 10px;
+           border: 2px solid #ccc;
+           border-radius: 4px;
+        }
+        
+        input[type=submit]{
+            font-size:20px;
+            background-color:#4CAF50;
+            color:white;
+            padding:8px 10px;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+    <body>
+        <a href="/">Back</a><br>
+        <h1>Please Login!</h1><br>
+        
+        <form method="post"> 
+            <input type="radio" name="type" value="voter" id="voter">
+            <label for="voter">Voter</label><br>
+            <input type="radio" name="type" value="leader" id="leader">
+            <label for='leader'>Leader</label><br><br>
+            <input type="text" id="address" name="Address" placeholder="Enter your address...">
+            <input type="submit" value="Login">
+        </form>
+        <script type="text/javascript">
+            var error_msg='{{error_message | safe}}';
+            //console.log(error_msg);
+            function error_alert(msg){
+                if(msg!=''){
+                    alert(msg);
+                }
+            }
+            error_alert(error_msg);
+        </script>
+    </body>
+</html>

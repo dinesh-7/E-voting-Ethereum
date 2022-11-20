@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Current Ballot Status</title>
+        <!--introduce echarts-->
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    </head>
+    <style>
+        a{font-family:monospace;
+          font-weight: bold;
+          font-size: 18px;
+        }
+    </style>
+    <body>
+        <a href="/">Back</a>
+        <br>
+        <br>
+        <div id="ballot status" style="width: 1200px;height:600px;"></div>
+        <script type="text/javascript">
+
+                var text='{{data|tojson}}';
+                var obj=JSON.parse(text);
+                var voter_options=[];
+                for(var i=0;i<obj.length;i++){
+                    voter_options.push(obj[i][0]);
+                }
+                var Series=[];
+                for(var i=0;i<obj.length;i++){ //use .length is not perfect though..
+                    var item={
+                        name:obj[i][0],
+                        type:"bar",
+                        data:[obj[i][1]]
+                    };
+                    Series.push(item);
+                }
+                //initialization of echarts obj
+                var myChart=echarts.init(document.getElementById('ballot status'), 'light');
+                // //set option
+                option={
+                    title:{text:"voter-option combination status",
+                            x:'center',
+                            y:'bottom',
+                            textStyle:{fontSize:30,fontWeight:'bolder',color:'#333'}},
+                    tooltip:{},
+                    legend:{x:"right",y:"top",data:voter_options},
+                    xAxis:[{type:"category",name:"Voter-Option",nameLocation:"middle"}],
+                    yAxis:[{type:"value",name:"Points",nameLocation:"middle"}],
+                    series:Series
+                };
+                
+                myChart.setOption(option);
+        </script>
+    </body>
+</html>
